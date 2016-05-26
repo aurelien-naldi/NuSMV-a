@@ -1,4 +1,3 @@
-On the BddEnc\_print\_bdd\_wff branch
 
 ### How to use the command line option `-a`
 
