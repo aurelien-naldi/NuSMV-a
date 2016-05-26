@@ -1,3 +1,5 @@
+On the BddEnc\_print\_bdd\_wff branch
+
 ### How to use the command line option `-a`
 
 The command line option `-a` adds support for printing initial states, accepting states and initial and accepting states of a BDD representing a CTL specification to the `nusmv` model checking procedure.
