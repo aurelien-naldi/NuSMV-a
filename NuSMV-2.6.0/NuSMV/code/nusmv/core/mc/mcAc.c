@@ -138,7 +138,34 @@ void print_accepting_states(NuSMVEnv_ptr env,
     OStream_printf(stream, "initial and accepting States: ");
     Cudd_DumpFormula_modified(dd, 1, &init_and_accepted, inames, out);
     OStream_printf(stream, "\nnumber of initial and accepting states: %g", inacc_size);
-    OStream_printf(stream, "\n\n");
+    OStream_printf(stream, "\n");
+    
+    
+    /* required for BddEnc_print_bdd_wff */
+    if (1) {
+      BoolEnc_ptr benc = BoolEncClient_get_bool_enc(BOOL_ENC_CLIENT(enc));
+      const array_t* layer_names = BaseEnc_get_committed_layer_names(BASE_ENC(enc));
+      
+      SymbTable_ptr st = BaseEnc_get_symb_table(BASE_ENC(enc));
+      NodeList_ptr all_vars = SymbTable_get_layers_sf_vars(st, layer_names);
+      NodeList_ptr scalar_vars = NodeList_create();
+      ListIter_ptr iter;
+    
+      NODE_LIST_FOREACH(all_vars, iter) {
+        node_ptr v = NodeList_get_elem_at(all_vars, iter);
+        if (BoolEnc_is_var_bit(benc, v)) continue;
+        NodeList_append(scalar_vars, v);
+      }
+      NodeList_destroy(all_vars);
+      
+      OStream_printf(stream, "accepting States using BddEnc_print_bdd_wff: ");
+      BddEnc_print_bdd_wff(enc, accepted, scalar_vars, true, false, 0, stream);
+      OStream_printf(stream, "\n\n");
+    }
+    /*-----------------------------------*/
+    
+    
+    
   }
   
   /* write to file, if filename is specified */
