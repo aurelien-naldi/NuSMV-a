@@ -130,7 +130,7 @@ number of initial and accepting states: 6
 
 ### Build from source for Linux
 
-(1) /NuSMV/mkdir build
-(2) /NuSMV/build/cmake ..
-(3) /NuSMV/build/make
+- `/NuSMV/mkdir build`
+- `/NuSMV/build/cmake ..`
+- `/NuSMV/build/make`
 
